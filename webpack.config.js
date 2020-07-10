@@ -3,7 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'index_bundle.js',
@@ -21,19 +21,14 @@ module.exports = {
   ],
   // 引用文件省略后缀名
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.css', '.less'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less'],
   },
   module: {
     rules: [
       {
-        test: /\.m?(js|jsx)$/,
+        test: /\.m?(js|jsx|ts|tsx)$/,
         exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
+        use: 'babel-loader',
       },
       {
         test: /\.css$/,
@@ -45,6 +40,8 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           'style-loader',
+          // 'typings-for-css-modules-loader',
+          '@teamsupercell/typings-for-css-modules-loader',
           {
             loader: 'css-loader',
             options: {

@@ -42,7 +42,7 @@ const columns = [
   {
     title: 'Action',
     key: 'action',
-    render: (text, record) => (
+    render: (_text, record) => (
       <Space size="middle">
         <a>Invite {record.name}</a>
         <Link to="/login">Delete</Link>
