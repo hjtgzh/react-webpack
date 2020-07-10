@@ -18,9 +18,9 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx}": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
+      "eslint --ext .js,.jsx src/",
+      "prettier --check src/**/*.js src/**/*.jsx",
+      "git add ."
     ]
   },
   "dependencies": {
