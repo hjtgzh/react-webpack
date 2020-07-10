@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox, Select } from 'antd';
+import { Form, Input, Button, Checkbox } from 'antd';
 import { useHistory } from 'react-router-dom';
 import styles from './style.less';
 
@@ -13,14 +13,11 @@ const tailLayout = {
 
 function Login() {
   const history = useHistory();
-  const onFinish = (values) => {
-    console.log('Success:', values);
+  const onFinish = () => {
     history.push('/home');
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
+  const onFinishFailed = () => {};
 
   return (
     <div className={styles.content}>
