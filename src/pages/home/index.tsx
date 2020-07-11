@@ -1,3 +1,12 @@
+/*
+ * @文件描述: home首页
+ * @公司: thundersdata
+ * @作者: 黄建停
+ * @Date: 2020-07-09 15:58:20
+ * @LastEditors: 黄建停
+ * @LastEditTime: 2020-07-11 16:46:39
+ */
+
 import React from 'react';
 import { Table, Tag, Space } from 'antd';
 import { Link } from 'react-router-dom';
@@ -75,8 +84,12 @@ const data = [
   },
 ];
 
-function Home() {
-  return <Table columns={columns} dataSource={data} />;
+interface Iprops {
+  name?: string;
 }
+
+const Home: React.FC<Iprops> = () => {
+  return <Table columns={columns} dataSource={data} />;
+};
 
 export default Home;

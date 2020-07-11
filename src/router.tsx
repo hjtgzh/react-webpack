@@ -8,7 +8,7 @@ import {
 import Home from './pages/home';
 import Login from './pages/login';
 
-export default () => (
+export default (): React.ReactElement => (
   <Router>
     <Switch>
       <Route exact path="/">

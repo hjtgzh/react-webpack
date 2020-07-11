@@ -1,75 +1,94 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 
-module.exports = {
-  entry: './src/index.tsx',
-  output: {
-    path: path.resolve(__dirname, './build'),
-    filename: 'index_bundle.js',
-  },
-  devServer: {
-    // contentBase: './build',
-    // 刷新后报 Cannot GET /
-    historyApiFallback: true,
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-    }),
-    new CleanWebpackPlugin(),
-  ],
-  // 引用文件省略后缀名
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less'],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.m?(js|jsx|ts|tsx)$/,
-        exclude: /(node_modules|bower_components)/,
-        use: 'babel-loader',
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      // 由于antd 和 Css Modules 不能混用，也可能与其他样式包不能混用，所以要针对/node_modules单独配置一条loader规则，
-      {
-        test: /\.less$/,
-        exclude: /node_modules/,
-        use: [
-          'style-loader',
-          // 'typings-for-css-modules-loader',
-          '@teamsupercell/typings-for-css-modules-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[local]___[hash:base64:5]',
-              },
-            },
-          },
-          'less-loader',
-        ],
-      },
-      // antd /node_modules/ less 单独设置，解决antd样式不生效的问题
-      {
-        test: /\.less$/,
-        include: /node_modules/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'less-loader',
-            options: {
-              lessOptions: {
-                javascriptEnabled: true,
-              },
-            },
-          },
-        ],
-      },
+// antd-dayjs-webpack-plugin 插件，无需对现有代码做任何修改直接将antd里的 Moment.js 替换成 Day.js
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
+
+const path = require('path');
+module.exports = (env) => {
+  console.log('env: ', env); // 'env.NODE_ENV'
+  return {
+    entry: './src/index.tsx',
+    output: {
+      path: path.resolve(__dirname, './build'),
+      filename: 'index_bundle.js',
+    },
+    // 开发环境使用devtool，生产环境不使用
+    devtool: env.NODE_ENV === 'develop' ? 'source-map' : false,
+    devServer: {
+      // contentBase: './build',
+      // 刷新后报 Cannot GET /
+      historyApiFallback: true,
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: 'src/index.html',
+      }),
+      new CleanWebpackPlugin(),
+      new BundleAnalyzerPlugin({
+        openAnalyzer: false,
+      }),
+      new AntdDayjsWebpackPlugin(),
     ],
-  },
+    // 引用文件省略后缀名
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less'],
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
+    },
+    module: {
+      rules: [
+        {
+          test: /\.m?(js|jsx|ts|tsx)$/,
+          exclude: /(node_modules|bower_components)/,
+          // 1、使用 typescript 把 ts 代码编译到 ES6，保留 jsx
+          // 2、使用 babel 把 ES6 代码 和 jsx 编译到 ES5
+          use: ['babel-loader', 'ts-loader'],
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
+        },
+        // 由于antd 和 Css Modules 不能混用，也可能与其他样式包不能混用，所以要针对/node_modules单独配置一条loader规则，
+        {
+          test: /\.less$/,
+          exclude: /node_modules/,
+          use: [
+            'style-loader',
+            // 'typings-for-css-modules-loader',
+            '@teamsupercell/typings-for-css-modules-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  localIdentName: '[local]___[hash:base64:5]',
+                },
+              },
+            },
+            'less-loader',
+          ],
+        },
+        // antd /node_modules/ less 单独设置，解决antd样式不生效的问题
+        {
+          test: /\.less$/,
+          include: /node_modules/,
+          use: [
+            'style-loader',
+            'css-loader',
+            {
+              loader: 'less-loader',
+              options: {
+                lessOptions: {
+                  javascriptEnabled: true,
+                },
+              },
+            },
+          ],
+        },
+      ],
+    },
+  };
 };

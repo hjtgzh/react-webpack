@@ -1,5 +1,14 @@
+/*
+ * @文件描述: 登录页面
+ * @公司: thundersdata
+ * @作者: 黄建停
+ * @Date: 2020-07-09 15:57:37
+ * @LastEditors: 黄建停
+ * @LastEditTime: 2020-07-11 17:13:52
+ */
+
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, DatePicker } from 'antd';
 import { useHistory } from 'react-router-dom';
 import styles from './style.less';
 
@@ -11,13 +20,20 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-function Login() {
+interface Iprops {
+  name?: string;
+}
+
+const Login: React.FC<Iprops> = () => {
   const history = useHistory();
   const onFinish = () => {
+    // console.log(1);
     history.push('/home');
   };
 
-  const onFinishFailed = () => {};
+  const onFinishFailed = () => {
+    console.log(1);
+  };
 
   return (
     <div className={styles.content}>
@@ -43,7 +59,9 @@ function Login() {
         >
           <Input.Password />
         </Form.Item>
-
+        <Form.Item label="DatePicker" name="time">
+          <DatePicker />
+        </Form.Item>
         <Form.Item {...tailLayout} name="remember" valuePropName="checked">
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
@@ -56,6 +74,6 @@ function Login() {
       </Form>
     </div>
   );
-}
+};
 
 export default Login;
