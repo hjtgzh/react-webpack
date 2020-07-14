@@ -4,7 +4,7 @@
  * @作者: 黄建停
  * @Date: 2020-07-09 15:57:37
  * @LastEditors: 黄建停
- * @LastEditTime: 2020-07-14 14:15:30
+ * @LastEditTime: 2020-07-14 15:52:08
  */
 
 /*
@@ -20,7 +20,7 @@ import React, { useEffect } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import lscache from 'lscache';
 // import { userService } from '@/services/user.service';
-// import { history } from 'umi';
+import { useHistory } from 'react-router-dom';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import styles from './style.less';
@@ -39,15 +39,15 @@ interface LoginProps {
 
 const Login: React.FC<LoginProps> = () => {
   const [form] = Form.useForm();
+  const history = useHistory();
 
-  // 参考https://github.com/react-component/field-form/issues/70
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onFinish = async (values: any) => {
     const { username, password, remember } = values;
     if (remember) {
       lscache.set('username', username);
       lscache.set('password', password);
     }
+    history.push('/home');
     // const result = await login(values);
     // if (result) {
     //   const { query } = props.location;

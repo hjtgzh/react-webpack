@@ -4,12 +4,16 @@
  * @作者: 黄建停
  * @Date: 2020-07-09 15:58:20
  * @LastEditors: 黄建停
- * @LastEditTime: 2020-07-11 16:46:39
+ * @LastEditTime: 2020-07-14 17:01:33
  */
 
-import React from 'react';
-import { Table, Tag, Space } from 'antd';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Table, Space } from 'antd';
 import { Link } from 'react-router-dom';
+import Counter from './Counter';
+import { getHomeTableData } from '@/stores/home';
+import styles from './style.less';
 
 const columns = [
   {
@@ -19,77 +23,62 @@ const columns = [
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: 'Phone',
+    dataIndex: 'contactPhone',
+    key: 'contactPhone',
   },
   {
     title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (tags) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+    dataIndex: 'customerAddress',
+    key: 'customerAddress',
   },
   {
     title: 'Action',
     key: 'action',
     render: (_text, record) => (
       <Space size="middle">
-        <a>Invite {record.name}</a>
+        <a>{record.name}</a>
         <Link to="/login">Delete</Link>
       </Space>
     ),
   },
 ];
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
-
+/* 定义props类型 */
 interface Iprops {
   name?: string;
 }
 
 const Home: React.FC<Iprops> = () => {
-  return <Table columns={columns} dataSource={data} />;
+  /* store里面数据 */
+  const {
+    homeTableData: { list, page, total },
+  } = useSelector((state) => state.home);
+
+  /* dispatch动作 */
+  const dispatch = useDispatch();
+
+  /* 页面首次加载 */
+  useEffect(() => {
+    dispatch(getHomeTableData({}));
+  }, [dispatch]);
+
+  return (
+    <>
+      <Counter />
+      <div className={styles.content}>
+        <Table
+          columns={columns}
+          dataSource={list}
+          pagination={{
+            hideOnSinglePage: true,
+            current: page,
+            total: total,
+          }}
+        />
+      </div>
+    </>
+  );
 };
 
 export default Home;

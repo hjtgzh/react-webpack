@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.10.4",
+    "@reduxjs/toolkit": "^1.4.0",
     "antd": "^4.4.1",
     "axios": "^0.19.2",
     "dayjs": "^1.8.29",
@@ -33,6 +34,7 @@
     "qs": "^6.9.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {

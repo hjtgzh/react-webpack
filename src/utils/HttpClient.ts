@@ -4,7 +4,7 @@
  * @作者: 黄建停
  * @Date: 2020-07-11 13:58:27
  * @LastEditors: 黄建停
- * @LastEditTime: 2020-07-11 14:19:01
+ * @LastEditTime: 2020-07-14 16:40:17
  */
 
 import qs from 'qs';
@@ -142,7 +142,8 @@ const axios = Axios.create({
 axios.interceptors.request.use(
   (config) => {
     const { headers, ...rest } = config;
-    const accessToken = user.getToken();
+    // const accessToken = user.getToken();
+    const accessToken = 'a0ad78571733a6f49360d76ba5225bb0';
     return {
       ...rest,
       headers: {
