@@ -8,7 +8,7 @@ const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 const path = require('path');
 module.exports = (env) => {
-  console.log('env: ', env); // 'env.NODE_ENV'
+  // console.log('env: ', env); // 'env.NODE_ENV'
   return {
     entry: './src/index.tsx',
     output: {
@@ -48,6 +48,7 @@ module.exports = (env) => {
           // 2、使用 babel 把 ES6 代码 和 jsx 编译到 ES5
           use: ['babel-loader', 'ts-loader'],
         },
+        // 处理css的loader
         {
           test: /\.css$/,
           use: ['style-loader', 'css-loader'],
@@ -84,6 +85,19 @@ module.exports = (env) => {
                 lessOptions: {
                   javascriptEnabled: true,
                 },
+              },
+            },
+          ],
+        },
+        // 它将图片文件转换为base64 URI
+        {
+          test: /\.(png|jpg|gif)$/i,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                esModule: false,
+                limit: 8192,
               },
             },
           ],

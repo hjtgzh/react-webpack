@@ -1,6 +1,13 @@
 declare namespace StyleLessNamespace {
   export interface IStyleLess {
-    content: string;
+    btnItem: string;
+    loginContent: string;
+    loginForm: string;
+    loginInput: string;
+    loginWrap: string;
+    logo: string;
+    remember: string;
+    title: string;
   }
 }
 

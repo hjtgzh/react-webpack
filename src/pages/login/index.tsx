@@ -4,74 +4,127 @@
  * @作者: 黄建停
  * @Date: 2020-07-09 15:57:37
  * @LastEditors: 黄建停
- * @LastEditTime: 2020-07-11 17:13:52
+ * @LastEditTime: 2020-07-14 14:15:30
  */
 
-import React from 'react';
-import { Form, Input, Button, Checkbox, DatePicker } from 'antd';
-import { useHistory } from 'react-router-dom';
+/*
+ * @文件描述: 登录页面
+ * @公司: thundersdata
+ * @作者: 黄建停
+ * @Date: 2020-04-09 17:51:27
+ * @LastEditors: 黄建停
+ * @LastEditTime: 2020-06-20 11:13:54
+ */
+
+import React, { useEffect } from 'react';
+import { Form, Input, Button, Checkbox } from 'antd';
+import lscache from 'lscache';
+// import { userService } from '@/services/user.service';
+// import { history } from 'umi';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+
 import styles from './style.less';
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
+const FormItem = Form.Item;
 
-interface Iprops {
-  name?: string;
+// const { login } = userService;
+
+interface LoginProps {
+  location?: {
+    query: {
+      redirectUrl: string;
+    };
+  };
 }
 
-const Login: React.FC<Iprops> = () => {
-  const history = useHistory();
-  const onFinish = () => {
-    // console.log(1);
-    history.push('/home');
+const Login: React.FC<LoginProps> = () => {
+  const [form] = Form.useForm();
+
+  // 参考https://github.com/react-component/field-form/issues/70
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onFinish = async (values: any) => {
+    const { username, password, remember } = values;
+    if (remember) {
+      lscache.set('username', username);
+      lscache.set('password', password);
+    }
+    // const result = await login(values);
+    // if (result) {
+    //   const { query } = props.location;
+    //   if (query.redirectUrl) {
+    //     history.push(query.redirectUrl);
+    //   } else {
+    //     history.push('/');
+    //   }
+    // }
   };
 
-  const onFinishFailed = () => {
-    console.log(1);
-  };
+  useEffect(() => {
+    const username = lscache.get('username');
+    const password = lscache.get('password');
+    if (username && password) {
+      form.setFieldsValue({
+        username,
+        password,
+        remember: true,
+      });
+    }
+  }, [form]);
 
   return (
-    <div className={styles.content}>
-      <Form
-        {...layout}
-        name="basic"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+    <div className={styles.loginWrap}>
+      <div className={styles.loginContent}>
+        <img
+          src={require('@/assets/login/logo.png')}
+          alt=""
+          className={styles.logo}
+        />
+        <strong className={styles.title}>测试系统</strong>
+        <Form
+          name="nest-messages"
+          form={form}
+          onFinish={onFinish}
+          className={styles.loginForm}
         >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item label="DatePicker" name="time">
-          <DatePicker />
-        </Form.Item>
-        <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
-        <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+          <FormItem
+            name="username"
+            rules={[{ required: true, message: '账号不能为空' }]}
+          >
+            <Input
+              placeholder="请输入账号"
+              prefix={<UserOutlined />}
+              className={styles.loginInput}
+            />
+          </FormItem>
+          <FormItem
+            name="password"
+            rules={[{ required: true, message: '密码不能为空' }]}
+          >
+            <Input.Password
+              placeholder="请输入密码"
+              prefix={<LockOutlined />}
+              className={styles.loginInput}
+            />
+          </FormItem>
+          <Form.Item
+            name="remember"
+            valuePropName="checked"
+            className={styles.remember}
+          >
+            <Checkbox>记住密码</Checkbox>
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              shape="round"
+              className={styles.btnItem}
+            >
+              登录
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 };
