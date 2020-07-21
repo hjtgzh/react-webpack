@@ -4,7 +4,7 @@
  * @作者: 黄建停
  * @Date: 2020-07-10 16:43:54
  * @LastEditors: 黄建停
- * @LastEditTime: 2020-07-14 18:32:00
+ * @LastEditTime: 2020-07-21 10:42:24
 -->
 
 ## 项目简介
@@ -40,3 +40,13 @@ npm start (启动服务)
 npm run build (正式环境的打包部署)
 
 ```
+
+## webpack 优化
+
+1、antd 按需加载---babel-plugin-import
+2、js 压缩---terser-webpack-plugin
+3、dayjs 替换 moment---dayjs
+4、模块懒加载---react-loadable
+5、图片文件转换为 base64---url-loader
+6、第三方库从主要的包里分离出来---splitChunks
+7、lodash 按需引入，如 import isEmpty from 'lodash/isEmpty'
