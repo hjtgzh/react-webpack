@@ -41,6 +41,7 @@ module.exports = {
       new TerserPlugin({
         parallel: true, // 是否并行打包
         cache: true, // 是否缓存
+        extractComments: false, // 删除多余.LICENSE.txt文件
       }),
     ],
     splitChunks: {
@@ -52,10 +53,10 @@ module.exports = {
       name: true,
       cacheGroups: {
         vendors: {
+          chunks: 'all',
           // 打包两个页面的公共代码
           minChunks: 2, // 引入两次及以上被打包
           name: 'vendors', // 分离包的名字
-          chunks: 'all',
         },
       },
     },
