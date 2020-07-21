@@ -4,7 +4,7 @@
  * @作者: 黄建停
  * @Date: 2020-07-10 16:43:54
  * @LastEditors: 黄建停
- * @LastEditTime: 2020-07-10 19:34:51
+ * @LastEditTime: 2020-07-14 18:32:00
 -->
 
 ## 项目简介
@@ -13,7 +13,7 @@ react、webpack 从零开始搭建
 
 ## 技术栈
 
-react@16.13.1 + react-router-dom@5.2.0 + webpack@4.43.0 + less@3.11.3 + antd@4.4.1 + typescript@3.9.6
+react@16.13.1 + react-router-dom@5.2.0 + webpack@4.43.0 + less@3.11.3 + antd@4.4.1 + typescript@3.9.6 + @reduxjs/toolkit@1.4.0 + react-redux@7.2.0
 
 ## 运行
 

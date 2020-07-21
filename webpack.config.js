@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 
@@ -13,10 +14,11 @@ module.exports = (env) => {
     entry: './src/index.tsx',
     output: {
       path: path.resolve(__dirname, './build'),
-      filename: 'index_bundle.js',
+      filename: '[name].js',
+      chunkFilename: '[name].js', // 设置按需加载后的chunk名字
     },
     // 开发环境使用devtool，生产环境不使用
-    devtool: env.NODE_ENV === 'develop' ? 'source-map' : false,
+    devtool: env.NODE_ENV === 'development' ? 'source-map' : false,
     devServer: {
       // contentBase: './build',
       // 刷新后报 Cannot GET /
@@ -32,6 +34,31 @@ module.exports = (env) => {
       }),
       new AntdDayjsWebpackPlugin(),
     ],
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          parallel: true, // 是否并行打包
+          cache: true, // 是否缓存
+        }),
+      ],
+      splitChunks: {
+        chunks: 'all', // initial、async和all
+        minSize: 30000, // 形成一个新代码块最小的体积
+        maxAsyncRequests: 5, // 按需加载时候最大的并行请求数
+        maxInitialRequests: 3, // 最大初始化请求数
+        automaticNameDelimiter: '~', // 打包分割符
+        name: true,
+        cacheGroups: {
+          vendors: {
+            // 打包两个页面的公共代码
+            minChunks: 2, // 引入两次及以上被打包
+            name: 'vendors', // 分离包的名字
+            chunks: 'all',
+          },
+        },
+      },
+    },
     // 引用文件省略后缀名
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less'],

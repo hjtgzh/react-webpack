@@ -4,13 +4,15 @@
  * @作者: 黄建停
  * @Date: 2020-07-09 15:58:20
  * @LastEditors: 黄建停
- * @LastEditTime: 2020-07-14 17:01:33
+ * @LastEditTime: 2020-07-20 19:19:38
  */
 
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Space } from 'antd';
 import { Link } from 'react-router-dom';
+// 只引用需要的部分
+import isEmpty from 'lodash/isEmpty';
 import Counter from './Counter';
 import { getHomeTableData } from '@/stores/home';
 import styles from './style.less';
@@ -69,7 +71,7 @@ const Home: React.FC<Iprops> = () => {
       <div className={styles.content}>
         <Table
           columns={columns}
-          dataSource={list}
+          dataSource={!isEmpty(list) && list}
           pagination={{
             hideOnSinglePage: true,
             current: page,
