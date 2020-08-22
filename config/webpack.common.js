@@ -6,7 +6,7 @@ const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 const path = require('path');
 module.exports = {
-  entry: path.resolve(__dirname, '../src/index.tsx'),
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, '../build'),
     filename: '[name].js',
