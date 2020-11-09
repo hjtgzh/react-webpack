@@ -4,11 +4,16 @@ const webpackCommon = require('./webpack.common.js');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // js压缩，支持es6语法
 const TerserPlugin = require('terser-webpack-plugin');
+// 打包分析
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 
 module.exports = merge(webpackCommon, {
   mode: 'production',
   // devtool: 'source-map',
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [new CleanWebpackPlugin(),new BundleAnalyzerPlugin({
+    openAnalyzer: false,
+  })],
   optimization: {
     minimizer: [
       new TerserPlugin({

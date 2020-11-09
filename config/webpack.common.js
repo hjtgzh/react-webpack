@@ -1,3 +1,4 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // html模板
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -17,6 +18,7 @@ module.exports = {
       template: './src/index.html',
     }),
     new AntdDayjsWebpackPlugin(),
+    new MiniCssExtractPlugin(),
   ],
   // 引用文件省略后缀名
   resolve: {
@@ -37,14 +39,15 @@ module.exports = {
       // 处理css的loader
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       // 由于antd 和 Css Modules 不能混用，也可能与其他样式包不能混用，所以要针对/node_modules单独配置一条loader规则，
       {
         test: /\.less$/,
         exclude: /node_modules/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
+          // 'style-loader', // 跟MiniCssExtractPlugin冲突
           // 'typings-for-css-modules-loader',
           '@teamsupercell/typings-for-css-modules-loader',
           {
@@ -63,7 +66,8 @@ module.exports = {
         test: /\.less$/,
         include: /node_modules/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
+          // 'style-loader', // 跟MiniCssExtractPlugin冲突
           'css-loader',
           {
             loader: 'less-loader',
@@ -84,8 +88,9 @@ module.exports = {
             options: {
               esModule: false,
               limit: 8192,
+              outputPath: 'images/',
             },
-          },
+        },
         ],
       },
     ],
