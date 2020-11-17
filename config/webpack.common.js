@@ -39,7 +39,16 @@ module.exports = {
       // 处理css的loader
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
       // 由于antd 和 Css Modules 不能混用，也可能与其他样式包不能混用，所以要针对/node_modules单独配置一条loader规则，
       {
@@ -58,6 +67,12 @@ module.exports = {
               },
             },
           },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
           'less-loader',
         ],
       },
@@ -69,6 +84,12 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           // 'style-loader', // 跟MiniCssExtractPlugin冲突
           'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
           {
             loader: 'less-loader',
             options: {
@@ -90,7 +111,7 @@ module.exports = {
               limit: 8192,
               outputPath: 'images/',
             },
-        },
+          },
         ],
       },
     ],

@@ -1,3 +1,5 @@
+// 具体可参考
+// https://www.robertcooper.me/using-eslint-and-prettier-in-a-typescript-project
 module.exports = {
   parser: '@typescript-eslint/parser',
   env: {

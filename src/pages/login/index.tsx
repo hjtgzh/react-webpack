@@ -7,15 +7,6 @@
  * @LastEditTime: 2020-08-22 17:08:26
  */
 
-/*
- * @文件描述: 登录页面
- * @公司: thundersdata
- * @作者: 黄建停
- * @Date: 2020-04-09 17:51:27
- * @LastEditors: 黄建停
- * @LastEditTime: 2020-06-20 11:13:54
- */
-
 import React, { useEffect } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import lscache from 'lscache';
