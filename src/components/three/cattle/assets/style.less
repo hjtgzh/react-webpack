@@ -1,0 +1,119 @@
+.ruban-lock {
+  width: 600px;
+  height: 500px;
+  position: absolute;
+  top: 1006px;
+  left: 2292px;
+  display: none;
+}
+.cattleout {
+  width: 614px;
+  height: 614px;
+  position: absolute;
+  top: 960px;
+  left: 2288px;
+}
+.streamline1 {
+  width: 614px;
+  height: 614px;
+  background: url(./images/streamlineout.png) no-repeat;
+  position: absolute;
+  // top: 960px;
+  // left: 2288px;
+  animation: mymove 5s linear 0s infinite;
+  -webkit-animation: mymove 5s linear 0s infinite; /*Safari and Chrome*/
+}
+@keyframes mymove {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes mymove /*Safari and Chrome*/ {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+.streamline2 {
+  width: 152px;
+  height: 586px;
+  background: url(./images/streamlinein.png) no-repeat;
+  position: absolute;
+  left: 227px;
+  top: 11px;
+  animation: mymove2 5s linear 0s infinite;
+  -webkit-animation: mymove2 5s linear 0s infinite; /*Safari and Chrome*/
+}
+@keyframes mymove2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+
+@-webkit-keyframes mymove2 /*Safari and Chrome*/ {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+.cattleoutLeft {
+  width: 307px;
+  height: 307px;
+  position: absolute;
+
+  .used {
+    color: white;
+    font-size: 32px;
+    transform: rotate(90deg);
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    display: block;
+    position: absolute;
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  }
+  .usednum {
+    color: white;
+    font-size: 32px;
+  }
+}
+.cattleoutRight {
+  width: 307px;
+  height: 307px;
+  position: absolute;
+  right: 0;
+  .surplus {
+    color: white;
+    font-size: 32px;
+  }
+  .surplusnum {
+    color: white;
+    font-size: 32px;
+  }
+}
+
+.usedRate{
+  position:absolute;
+  left: 170px;
+  top: 115px;
+  width: 133px;
+  height: 40px;
+  //border: 1px solid red;
+  font-family: HYLiLiangHeiJ;
+  text-align: center;
+  font-size: 40px;
+  color: #ffefcc;
+  letter-spacing: 0.92px;
+  text-shadow: 0 1px 2px #000000;
+  line-height: 40px;
+}

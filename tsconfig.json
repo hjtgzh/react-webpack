@@ -16,12 +16,12 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": false,
-    "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "experimentalDecorators": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "noUnusedLocals": false
   },
   "exclude": ["node_modules", "dist", "build", "mock"]
 }

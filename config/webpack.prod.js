@@ -5,15 +5,21 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // js压缩，支持es6语法
 const TerserPlugin = require('terser-webpack-plugin');
 // 打包分析
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+//   .BundleAnalyzerPlugin;
+// 通过optimize-css-assets-webpack-plugin插件可以对css进行压缩
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = merge(webpackCommon, {
   mode: 'production',
   // devtool: 'source-map',
-  plugins: [new CleanWebpackPlugin(),new BundleAnalyzerPlugin({
-    openAnalyzer: false,
-  })],
+  plugins: [
+    new CleanWebpackPlugin(),
+    // new BundleAnalyzerPlugin({
+    //   openAnalyzer: false,
+    // }),
+    new OptimizeCssAssetsPlugin(),
+  ],
   optimization: {
     minimizer: [
       new TerserPlugin({

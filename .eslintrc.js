@@ -30,7 +30,7 @@ module.exports = {
   },
   rules: {
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-use-before-define': 'off',

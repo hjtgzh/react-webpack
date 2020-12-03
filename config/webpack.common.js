@@ -1,3 +1,4 @@
+// webpack 4.0以后，官方推荐使用mini-css-extract-plugin插件来打包css文件（将CSS提取为独立的文件的插件）
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // html模板
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -5,20 +6,35 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // antd-dayjs-webpack-plugin 插件，无需对现有代码做任何修改直接将antd里的 Moment.js 替换成 Day.js
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
+// 通常用在我们打包的时候，将一些文件放到指定的文件夹下
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 const path = require('path');
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, '../build'),
-    filename: '[name].js',
-    chunkFilename: '[name].js', // 设置按需加载后的chunk名字
+    // 只是指示输出的目录，对应一个绝对路径
+    path: path.resolve(__dirname, '../build'), // build在上级目录
+    filename: '[name].[chunkhash:8].js',
+    chunkFilename: '[name].[chunkhash:8].js', // 设置按需加载后的chunk名字
   },
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../src/static'),
+          to: path.resolve(__dirname, '../build'),
+        },
+      ],
+    }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: path.resolve(__dirname, '../src/index.html'),
     }),
     new AntdDayjsWebpackPlugin(),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[id].[hash].css',
+    }),
   ],
   // 引用文件省略后缀名
   resolve: {
@@ -40,7 +56,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // 这里可以指定一个 publicPath
+              // 默认使用 webpackOptions.output中的publicPath
+              publicPath: '../',
+            },
+          },
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -55,7 +78,14 @@ module.exports = {
         test: /\.less$/,
         exclude: /node_modules/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // 这里可以指定一个 publicPath
+              // 默认使用 webpackOptions.output中的publicPath
+              publicPath: '../',
+            },
+          },
           // 'style-loader', // 跟MiniCssExtractPlugin冲突
           // 'typings-for-css-modules-loader',
           '@teamsupercell/typings-for-css-modules-loader',

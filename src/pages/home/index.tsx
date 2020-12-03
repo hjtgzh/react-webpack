@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
 import Counter from './Counter';
 import { getHomeTableData } from '@/stores/home';
+import Modal3D from '@/components/Modal3D';
 import styles from './style.less';
 
 const columns = [
@@ -79,6 +80,7 @@ const Home: React.FC<Iprops> = () => {
           }}
         />
       </div>
+      <Modal3D url="./dae/taurus/niu.dae" width={160} height={140} />
     </>
   );
 };
