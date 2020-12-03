@@ -50,3 +50,6 @@ npm run build (正式环境的打包部署)
 5. 图片文件转换为 base64---url-loader
 6. 第三方库从主要的包里分离出来---splitChunks
 7. lodash 按需引入，如 import isEmpty from 'lodash/isEmpty'
+8. mini-css-extract-plugin 插件来打包 css 文件（将 CSS 提取为独立的文件的插件）
+9. optimize-css-assets-webpack-plugin 插件可以对 css 进行压缩
+10. filename 和 chunkFilename 采用 hash 命名，解决浏览器缓存问题
