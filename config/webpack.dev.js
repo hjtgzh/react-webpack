@@ -7,7 +7,11 @@ const path = require('path');
 
 module.exports = merge(webpackCommon, {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
+  output: {
+    // 解决 Webpack + react-loadable +嵌套路由: Refused to apply style from '*/css/main.css' because its MIME type ('text/html')
+    publicPath: 'http://localhost:8080/',
+  },
   devServer: {
     contentBase: path.resolve(__dirname, '../build'), // build在上级目录
     // 刷新后报 Cannot GET /

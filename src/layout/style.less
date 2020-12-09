@@ -1,0 +1,56 @@
+@import '@/styles/variables.less';
+
+:global {
+  .ant-layout {
+    height: 100%;
+  }
+}
+
+.layout-side {
+  background: @white;
+  .logo {
+    height: 32px;
+    width: 98px;
+    background-image: url('../assets/login/logo.png');
+    background-size: 100% 100%;
+    margin: 24px;
+  }
+
+  .logo-small {
+    height: 32px;
+    width: 32px;
+    background-image: url('../assets/login/logo-small.png');
+    background-size: 100% 100%;
+    margin: 24px;
+  }
+}
+
+.site-layout {
+  &-header {
+    padding: 0 24px 0 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: @white;
+
+    .trigger {
+      font-size: 22px;
+      padding: 12px 0;
+      cursor: pointer;
+      transition: color 0.3s;
+
+      &:hover {
+        color: @primary;
+      }
+    }
+
+    .handleBt {
+      cursor: pointer;
+      color: @primary;
+    }
+  }
+  &-content {
+    margin: 24px 16px;
+    height: 100%;
+  }
+}

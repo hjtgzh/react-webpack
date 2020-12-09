@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 黄建停
  * @Date: 2020-07-09 15:58:20
- * @LastEditors: 黄建停
- * @LastEditTime: 2020-07-21 11:51:36
+ * @LastEditors: janko
+ * @LastEditTime: 2020-12-08 15:02:23
  */
 
 import React, { useEffect } from 'react';
@@ -13,7 +13,7 @@ import { Table, Space } from 'antd';
 import { Link } from 'react-router-dom';
 // 只引用需要的部分
 import isEmpty from 'lodash/isEmpty';
-import Counter from './Counter';
+// import Counter from './Counter';
 import { getHomeTableData } from '@/stores/home';
 import Modal3D from '@/components/Modal3D';
 import styles from './style.less';
@@ -68,7 +68,7 @@ const Home: React.FC<Iprops> = () => {
 
   return (
     <>
-      <Counter />
+      {/* <Counter /> */}
       <div className={styles.content}>
         <Table
           columns={columns}

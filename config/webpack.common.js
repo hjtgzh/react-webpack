@@ -87,7 +87,7 @@ module.exports = {
             },
           },
           // 'style-loader', // 跟MiniCssExtractPlugin冲突
-          // 'typings-for-css-modules-loader',
+          // 'typings-for-css-modules-loader',less-module自动为样式生成对应的d.ts文件，以方便使用ts开发
           '@teamsupercell/typings-for-css-modules-loader',
           {
             loader: 'css-loader',

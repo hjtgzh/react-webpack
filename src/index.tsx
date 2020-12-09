@@ -7,6 +7,7 @@ import zh_CN from 'antd/lib/locale-provider/zh_CN';
 // dayjs中文包
 import 'dayjs/locale/zh-cn';
 import Routes from './router';
+import './style.less';
 
 ReactDOM.render(
   <Provider store={store}>

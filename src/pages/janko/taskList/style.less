@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  height: 100%;
+  box-sizing: border-box;
+  background: rgb(76, 154, 255);
+  padding: 8px;
+
+  .column {
+    display: inline-block;
+    width: 292px;
+    margin-right: 12px;
+
+    .columnTitle {
+      font-size: 14px;
+      font-weight: 600;
+      height: 40px;
+      padding: 8px;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      background: rgb(235, 236, 240);
+    }
+    .columnContent {
+      overflow: auto;
+      padding: 8px;
+      background-color: rgb(235, 236, 240);
+    }
+    .columnContentActive {
+      background: #fcece7;
+    }
+    .issue {
+      padding: 14px 44px;
+      background: #ffffff;
+      margin-bottom: 8px;
+      border-radius: 2px;
+    }
+
+    .issueDragging {
+      position: relative;
+      min-height: 20px;
+      padding: 14px 44px;
+      background: #fefae8;
+      opacity: 0.9;
+      border: 2px #545f70 solid;
+      border-radius: 2px;
+    }
+  }
+}
