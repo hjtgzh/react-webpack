@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 黄建停
  * @Date: 2020-07-10 16:43:54
- * @LastEditors: 黄建停
- * @LastEditTime: 2020-07-21 13:58:06
+ * @LastEditors: janko
+ * @LastEditTime: 2020-12-11 17:48:17
 -->
 
 ## 项目简介
@@ -40,6 +40,22 @@ npm start (启动服务)
 npm run build (正式环境的打包部署)
 
 ```
+
+## 是否开启 mock
+
+1. 先运行 npm start (启动服务) ，然后另起一个终端运行 npm run mock (启动 express 服务)
+2. 打开 webpack.dev.js 文件，设置：
+
+```
+new webpack.DefinePlugin({
+    // 设置环境变量
+    'process.env.MOCK': JSON.stringify(true), // 是否开启mock数据
+}),
+
+```
+
+3. 添加 mock 数据，具体可以参考内部实例代码
+4. [mock 具体文档请参考：](http://mockjs.com)
 
 ## webpack 优化
 

@@ -3,8 +3,8 @@
  * @公司: thundersdata
  * @作者: 黄建停
  * @Date: 2020-07-14 16:07:59
- * @LastEditors: 黄建停
- * @LastEditTime: 2020-07-14 18:01:16
+ * @LastEditors: janko
+ * @LastEditTime: 2020-12-11 16:02:01
  */
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchData } from '@/utils/request';
@@ -35,7 +35,7 @@ const { getTableData } = homeSlice.actions;
 export const getHomeTableData = (params?: any) => async (dispatch) => {
   const result = await fetchData(
     {
-      url: `${BACKEND_URL}/service/customer/listByPage`,
+      url: `${BACKEND_URL}/api/table`,
       initialData: defaultListData,
     },
     params,

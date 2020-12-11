@@ -4,13 +4,12 @@
  * @作者: 黄建停
  * @Date: 2020-07-09 15:58:20
  * @LastEditors: janko
- * @LastEditTime: 2020-12-08 15:02:23
+ * @LastEditTime: 2020-12-11 17:32:03
  */
 
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Space } from 'antd';
-import { Link } from 'react-router-dom';
+import { Table } from 'antd';
 // 只引用需要的部分
 import isEmpty from 'lodash/isEmpty';
 // import Counter from './Counter';
@@ -20,30 +19,30 @@ import styles from './style.less';
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'Id',
+    dataIndex: 'userId',
+    key: 'userId',
     render: (text) => <a>{text}</a>,
   },
   {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
     title: 'Phone',
-    dataIndex: 'contactPhone',
-    key: 'contactPhone',
+    dataIndex: 'phone',
+    key: 'phone',
   },
   {
     title: 'Address',
-    dataIndex: 'customerAddress',
-    key: 'customerAddress',
+    dataIndex: 'address',
+    key: 'address',
   },
   {
     title: 'Action',
+    dataIndex: 'action',
     key: 'action',
-    render: (_text, record) => (
-      <Space size="middle">
-        <a>{record.name}</a>
-        <Link to="/login">Delete</Link>
-      </Space>
-    ),
   },
 ];
 
@@ -73,6 +72,7 @@ const Home: React.FC<Iprops> = () => {
         <Table
           columns={columns}
           dataSource={!isEmpty(list) && list}
+          rowKey="userId"
           pagination={{
             hideOnSinglePage: true,
             current: page,

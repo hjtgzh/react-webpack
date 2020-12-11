@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const webpackCommon = require('./webpack.common.js');
 // 打包分析
@@ -16,10 +17,21 @@ module.exports = merge(webpackCommon, {
     contentBase: path.resolve(__dirname, '../build'), // build在上级目录
     // 刷新后报 Cannot GET /
     historyApiFallback: true,
+    // 解决mock数据跨域问题
+    proxy: {
+      '/api/*': {
+        target: 'http://localhost:3333',
+        secure: false,
+      },
+    },
   },
   plugins: [
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
+    }),
+    new webpack.DefinePlugin({
+      // 设置环境变量
+      'process.env.MOCK': JSON.stringify(true), // 是否开启mock数据
     }),
   ],
 });
