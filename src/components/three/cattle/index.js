@@ -4,19 +4,18 @@
  * @作者: janko
  * @Date: 2020-12-03 18:09:46
  * @LastEditors: janko
- * @LastEditTime: 2020-12-12 17:39:09
+ * @LastEditTime: 2020-12-14 10:40:25
  */
 import React, { Component } from 'react';
 import * as THREE from 'three';
 import OBJ from './lubansuo';
 var OrbitControls = require('three-orbit-controls')(THREE);
 import { Progress } from 'antd';
-const SIZE = process.env.SIZE;
 
-import(`./assets/style${SIZE}.less`);
+import(`./assets/style.less`);
 let renderer, camera, scene, gui, light, controls;
-const innerWidth = SIZE === '-small' ? 150 : 600,
-  innerHeight = SIZE === '-small' ? 150 : 500;
+const innerWidth = 600,
+  innerHeight = 500;
 export default class RuBanLock extends Component {
   constructor(props) {
     super(props);
