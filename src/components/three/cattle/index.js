@@ -1,3 +1,11 @@
+/*
+ * @文件描述: 圆形文字
+ * @公司: cloudwise
+ * @作者: janko
+ * @Date: 2020-12-03 18:09:46
+ * @LastEditors: janko
+ * @LastEditTime: 2020-12-12 17:39:09
+ */
 import React, { Component } from 'react';
 import * as THREE from 'three';
 import OBJ from './lubansuo';
