@@ -4,7 +4,7 @@
  * @作者: janko
  * @Date: 2020-12-03 18:09:46
  * @LastEditors: janko
- * @LastEditTime: 2020-12-14 10:40:25
+ * @LastEditTime: 2020-12-16 16:09:59
  */
 import React, { Component } from 'react';
 import * as THREE from 'three';
@@ -167,94 +167,68 @@ export default class RuBanLock extends Component {
       haveUsedLimit = 300000;
     }
     return (
-      <div className={'cattleout' + SIZE}>
-        <div className={'streamline1' + SIZE} />
-        <div className={'streamline2' + SIZE} />
-        {/* <div className='cattleoutLeft'>
-                    <span className='used'>已用统筹额度：</span>
-                    <span className='usednum'>9000万元</span>
-                    <span className='usedroat'>90%</span>
-                </div> */}
-        {/* <div className='cattleoutRight'>
-                    <span className='surplus'>剩余统筹额度：</span>
-                    <span className='surplusnum'>1000万元</span>
-                    <span className='surplusroat'>10%</span>
-                </div> */}
+      <div className={'cattleout'}>
+        <div className={'streamline1'} />
+        <div className={'streamline2'} />
         <div
-          className={'ruban-lock' + SIZE}
+          className={'ruban-lock'}
           style={{ width: innerWidth, height: innerHeight }}
           ref={(e) => {
             this.dom = e;
           }}
         />
-
-        {SIZE === '-small' ? (
-          <div style={{ position: 'absolute', left: 18, top: -10 }}>
-            <svg width="133px" height="133px" viewBox="0 0 133 133">
-              <path
-                id="zxxPathSmall1"
-                fill="none"
-                stroke="rgba(0,0,0,0)"
-                d="M6,96 C4,60 60,4 140,50 "
-              />
-              <text fontSize="8" fill="white" stroke="white" strokeWidth="0.1">
-                <textPath href="#zxxPathSmall1">
-                  {'已用统筹额度:' + haveUsedLimit + '万元'}
-                </textPath>
-              </text>
-            </svg>
-          </div>
-        ) : (
-          <div style={{ position: 'absolute', left: 56, top: 56 }}>
-            <svg width="260px" height="260px" viewBox="0 0 260 260">
-              <path
-                id="zxxPath"
-                fill="none"
-                stroke="rgba(0,0,0,0)"
-                d="M22,260 C24,106.974508 106.974508,24 260,20"
-              />
-              <text fontSize="30" fill="white" stroke="white">
-                <textPath href="#zxxPath">
-                  {'已用统筹额度:' + haveUsedLimit + '万元'}
-                </textPath>
-              </text>
-            </svg>
-          </div>
-        )}
-
-        {SIZE === '-small' ? (
-          <div style={{ position: 'absolute', left: 92, top: 20 }}>
-            <svg width="133px" height="133px" viewBox="0 0 133 133">
-              <path
-                id="zxxPathSmall2"
-                fill="none"
-                stroke="rgba(0,0,0,0)"
-                d="M0,6 C68,10 70,70 70,120"
-              />
-              <text fontSize="8" fill="white" stroke="white" strokeWidth="0.1">
-                <textPath href="#zxxPathSmall2">
-                  {'剩余统筹额度:' + remainingLimit + '万元'}
-                </textPath>
-              </text>
-            </svg>
-          </div>
-        ) : (
-          <div style={{ position: 'absolute', left: 305, top: 50 }}>
-            <svg width="260px" height="300px" viewBox="0 0 260 260">
-              <path
-                id="zxxPath2"
-                fill="none"
-                stroke="rgba(0,0,0,0)"
-                d="M10,4 C150,24 260,130 220,320"
-              />
-              <text fontSize="30" fill="white" stroke="white">
-                <textPath href="#zxxPath2">
-                  {'剩余统筹额度:' + remainingLimit + '万元'}
-                </textPath>
-              </text>
-            </svg>
-          </div>
-        )}
+        <svg width="133px" height="133px" viewBox="0 0 133 133">
+          <path
+            id="zxxPathSmall1"
+            fill="none"
+            stroke="rgba(0,0,0,0)"
+            d="M6,96 C4,60 60,4 140,50 "
+          />
+          <text fontSize="8" fill="white" stroke="white" strokeWidth="0.1">
+            <textPath href="#zxxPathSmall1">
+              {'已用统筹额度:' + haveUsedLimit + '万元'}
+            </textPath>
+          </text>
+        </svg>
+        <svg width="260px" height="260px" viewBox="0 0 260 260">
+          <path
+            id="zxxPath"
+            fill="none"
+            stroke="rgba(0,0,0,0)"
+            d="M22,260 C24,106.974508 106.974508,24 260,20"
+          />
+          <text fontSize="30" fill="white" stroke="white">
+            <textPath href="#zxxPath">
+              {'已用统筹额度:' + haveUsedLimit + '万元'}
+            </textPath>
+          </text>
+        </svg>
+        <svg width="133px" height="133px" viewBox="0 0 133 133">
+          <path
+            id="zxxPathSmall2"
+            fill="none"
+            stroke="rgba(0,0,0,0)"
+            d="M0,6 C68,10 70,70 70,120"
+          />
+          <text fontSize="8" fill="white" stroke="white" strokeWidth="0.1">
+            <textPath href="#zxxPathSmall2">
+              {'剩余统筹额度:' + remainingLimit + '万元'}
+            </textPath>
+          </text>
+        </svg>
+        <svg width="260px" height="300px" viewBox="0 0 260 260">
+          <path
+            id="zxxPath2"
+            fill="none"
+            stroke="rgba(0,0,0,0)"
+            d="M10,4 C150,24 260,130 220,320"
+          />
+          <text fontSize="30" fill="white" stroke="white">
+            <textPath href="#zxxPath2">
+              {'剩余统筹额度:' + remainingLimit + '万元'}
+            </textPath>
+          </text>
+        </svg>
 
         <div className={'usedRate' + SIZE}>{haveUsedLimitRate + '%'}</div>
         <div
@@ -263,51 +237,24 @@ export default class RuBanLock extends Component {
         >
           {remainingLimitRate + '%'}
         </div>
-        {SIZE === '-small' ? (
-          <div
-            style={{
-              position: 'absolute',
-              left: 8.3,
-              top: 8.3,
-              transform: 'rotate(2.4deg)',
-            }}
-          >
-            <Progress
-              // percent={75}
-              type="circle"
-              strokeLinecap="square"
-              strokeWidth={4}
-              width={165}
-              gapPosition="top"
-              strokeColor="rgba(218,59,47,0.5)"
-              percent={remainingLimitRate}
-              trailColor="rgba(255,201,27,0.5)"
-              format={() => ''}
-            />
-          </div>
-        ) : (
-          <div
-            style={{
-              position: 'absolute',
-              left: 25,
-              top: 25,
-              transform: 'rotate(2.4deg)',
-            }}
-          >
-            <Progress
-              // percent={75}
-              type="circle"
-              strokeLinecap="square"
-              strokeWidth={4.3}
-              width={560}
-              gapPosition="top"
-              strokeColor="rgba(218,59,47,0.5)"
-              percent={remainingLimitRate}
-              trailColor="rgba(255,201,27,0.5)"
-              format={() => ''}
-            />
-          </div>
-        )}
+        <div
+          style={{
+            transform: 'rotate(2.4deg)',
+          }}
+        >
+          <Progress
+            // percent={75}
+            type="circle"
+            strokeLinecap="square"
+            strokeWidth={4}
+            width={165}
+            gapPosition="top"
+            strokeColor="rgba(218,59,47,0.5)"
+            percent={remainingLimitRate}
+            trailColor="rgba(255,201,27,0.5)"
+            format={() => ''}
+          />
+        </div>
       </div>
     );
   }

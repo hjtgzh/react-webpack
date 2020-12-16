@@ -35,6 +35,7 @@ module.exports = {
     }),
     new HtmlWebpackTagsPlugin({
       tags: ['env.config.js'],
+      // true表示在webpack增加的标签后添加，false表示在webpack增加的标签前添加
       append: false,
       hash: true,
     }),
@@ -65,7 +66,8 @@ module.exports = {
       },
       // 处理css的loader
       {
-        test: /\.css$/,
+        test: /\.css$/, // 正则匹配以.css结尾的文件
+        // 需要用的loader，一定是这个顺序，因为调用loader是从右往左编译的
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
