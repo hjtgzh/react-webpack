@@ -8,6 +8,8 @@ const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 // 通常用在我们打包的时候，将一些文件放到指定的文件夹下
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+// 注入的脚本或链接标签来增强html-webpack-plugin
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
 const path = require('path');
 module.exports = {
@@ -25,7 +27,16 @@ module.exports = {
           from: path.resolve(__dirname, '../src/static'),
           to: path.resolve(__dirname, '../build'),
         },
+        {
+          from: path.resolve(__dirname, '../env.config.js'),
+          to: path.resolve(__dirname, '../build'),
+        },
       ],
+    }),
+    new HtmlWebpackTagsPlugin({
+      tags: ['env.config.js'],
+      append: false,
+      hash: true,
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/index.html'),

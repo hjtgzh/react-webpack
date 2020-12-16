@@ -11,9 +11,10 @@ module.exports = merge(webpackCommon, {
   devtool: 'source-map',
   output: {
     // 解决 Webpack + react-loadable +嵌套路由: Refused to apply style from '*/css/main.css' because its MIME type ('text/html')
-    publicPath: 'http://localhost:8080/',
+    publicPath: 'http://localhost:5203/',
   },
   devServer: {
+    port: 5203,
     contentBase: path.resolve(__dirname, '../build'), // build在上级目录
     // 刷新后报 Cannot GET /
     historyApiFallback: true,

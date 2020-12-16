@@ -4,7 +4,7 @@
  * @作者: janko
  * @Date: 2020-12-07 14:10:26
  * @LastEditors: janko
- * @LastEditTime: 2020-12-09 14:11:34
+ * @LastEditTime: 2020-12-16 14:10:41
  */
 import React, { useState } from 'react';
 import {
@@ -65,6 +65,7 @@ const InitialData: initialDataInferface[] = [
 
 const Issue = (props: IssueProps) => {
   const { id, issueIndex, name } = props;
+  console.log('window name', (window as any).JANKO.name);
 
   return (
     <Draggable draggableId={`${id}`} index={issueIndex}>
