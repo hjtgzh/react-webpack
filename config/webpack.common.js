@@ -11,6 +11,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 // 注入的脚本或链接标签来增强html-webpack-plugin
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
+const PurifyCSSPlugin = require('purifycss-webpack');
+const glob = require('glob-all');
+
 const path = require('path');
 module.exports = {
   entry: './src/index.tsx',
@@ -46,6 +49,17 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash].css',
       chunkFilename: 'css/[id].[hash].css',
+    }),
+    new PurifyCSSPlugin({
+      paths: glob.sync([
+        path.resolve(__dirname, '../src/*.html'),
+        path.resolve(__dirname, '../src/*.js'),
+      ]),
+      minimize: true,
+      // 添加白名单 https://github.com/purifycss/purifycss
+      purifyOptions: {
+        whitelist: ['*purify*', '*ant*', '*bf*', 'a'],
+      },
     }),
   ],
   // 引用文件省略后缀名
@@ -106,7 +120,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[local]___[hash:base64:5]',
+                localIdentName: 'purify_[local]___[hash:base64:5]',
               },
             },
           },

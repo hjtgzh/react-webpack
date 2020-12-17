@@ -4,7 +4,7 @@
  * @作者: 黄建停
  * @Date: 2020-07-10 16:43:54
  * @LastEditors: janko
- * @LastEditTime: 2020-12-11 17:48:17
+ * @LastEditTime: 2020-12-17 15:58:54
 -->
 
 ## 项目简介
@@ -69,3 +69,4 @@ new webpack.DefinePlugin({
 8. mini-css-extract-plugin 插件来打包 css 文件（将 CSS 提取为独立的文件的插件）
 9. optimize-css-assets-webpack-plugin 插件可以对 css 进行压缩
 10. filename 和 chunkFilename 采用 hash 命名，解决浏览器缓存问题
+11. 使用 PurifyCSS 减少 CSS 文件大小(将项目中没有用到的 css 代码过滤掉)
