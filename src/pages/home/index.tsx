@@ -4,7 +4,7 @@
  * @作者: 黄建停
  * @Date: 2020-07-09 15:58:20
  * @LastEditors: janko
- * @LastEditTime: 2020-12-11 17:32:03
+ * @LastEditTime: 2020-12-18 14:39:40
  */
 
 import React, { useEffect } from 'react';
@@ -15,6 +15,7 @@ import isEmpty from 'lodash/isEmpty';
 // import Counter from './Counter';
 import { getHomeTableData } from '@/stores/home';
 import Modal3D from '@/components/Modal3D';
+import { Encrypt, Decrypt } from '@/utils';
 import styles from './style.less';
 
 const columns = [
@@ -63,6 +64,8 @@ const Home: React.FC<Iprops> = () => {
   /* 页面首次加载 */
   useEffect(() => {
     dispatch(getHomeTableData({}));
+    console.log('1', Encrypt(123));
+    console.log('2', Decrypt(Encrypt(123)));
   }, [dispatch]);
 
   return (

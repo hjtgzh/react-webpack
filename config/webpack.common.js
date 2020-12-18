@@ -11,8 +11,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 // 注入的脚本或链接标签来增强html-webpack-plugin
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 
-const PurifyCSSPlugin = require('purifycss-webpack');
-const glob = require('glob-all');
+// 这个优化会导致部分antd样式有问题
+// const PurifyCSSPlugin = require('purifycss-webpack');
+// const glob = require('glob-all');
 
 const path = require('path');
 module.exports = {
@@ -44,23 +45,25 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/index.html'),
+      favicon: path.resolve(__dirname, '../src/assets/favicon.ico'),
     }),
     new AntdDayjsWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash].css',
       chunkFilename: 'css/[id].[hash].css',
     }),
-    new PurifyCSSPlugin({
-      paths: glob.sync([
-        path.resolve(__dirname, '../src/*.html'),
-        path.resolve(__dirname, '../src/*.js'),
-      ]),
-      minimize: true,
-      // 添加白名单 https://github.com/purifycss/purifycss
-      purifyOptions: {
-        whitelist: ['*purify*', '*ant*', '*bf*', 'a'],
-      },
-    }),
+    // new PurifyCSSPlugin({
+    //   paths: glob.sync([
+    //     path.resolve(__dirname, '../src/*.html'),
+    //     path.resolve(__dirname, '../src/*.js'),
+    //   ]),
+    //   minimize: true,
+    //   // 添加白名单 https://github.com/purifycss/purifycss
+    //   purifyOptions: {
+    //     whitelist: ['*purify*', '*ant*', '*bf*', 'a'],
+    //     info: true,
+    //   },
+    // }),
   ],
   // 引用文件省略后缀名
   resolve: {
