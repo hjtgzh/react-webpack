@@ -4,7 +4,7 @@
  * @作者: janko
  * @Date: 2020-12-09 16:48:35
  * @LastEditors: janko
- * @LastEditTime: 2020-12-09 17:25:37
+ * @LastEditTime: 2020-12-25 15:03:12
  */
 import {
   UserOutlined,
@@ -35,6 +35,18 @@ export const menuTree = [
         key: '/janko/editor',
         icon: SettingOutlined,
         link: '/janko/editor',
+      },
+      {
+        title: 'color',
+        key: '/janko/color',
+        icon: SettingOutlined,
+        link: '/janko/color',
+      },
+      {
+        title: 'map',
+        key: '/janko/map',
+        icon: SettingOutlined,
+        link: '/janko/map',
       },
     ],
   },

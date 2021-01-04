@@ -3,10 +3,11 @@
  * @公司: thundersdata
  * @作者: 黄建停
  * @Date: 2020-05-29 11:48:32
- * @LastEditors: 黄建停
- * @LastEditTime: 2020-07-11 15:24:34
+ * @LastEditors: janko
+ * @LastEditTime: 2020-12-28 16:33:09
  */
 import { message } from 'antd';
+import qs from 'qs';
 import http from './HttpClient';
 
 type FetchType = 'get' | 'post' | 'postFormWithoutToken' | 'json' | 'postFile';
@@ -82,3 +83,38 @@ export async function fetchPostData<T>(
     return false;
   }
 }
+
+export const jsonp = function (url, params = {}) {
+  return new Promise((resolve, reject) => {
+    // 初始化url
+    const callbackName = 'jsonpCB';
+    const urlParams = {
+      ...params,
+      callback: 'jsonpCB',
+    };
+    const scriptNode = document.createElement('script');
+    scriptNode.src = `${url}?${qs.stringify(urlParams)}`;
+    // 触发callback，触发后删除js标签和绑定在window上的callback
+    window[callbackName] = (result) => {
+      delete window[callbackName];
+      document.body.removeChild(scriptNode);
+      if (result) {
+        resolve(result);
+      } else {
+        reject('没有返回数据!');
+      }
+    };
+    // js加载异常的情况
+    scriptNode.addEventListener(
+      'error',
+      () => {
+        delete window[callbackName];
+        document.body.removeChild(scriptNode);
+        reject('JavaScript资源加载失败');
+      },
+      false,
+    );
+    // 添加js节点到document上时，开始请求
+    document.body.appendChild(scriptNode);
+  });
+};

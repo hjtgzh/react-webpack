@@ -4,11 +4,10 @@
  * @作者: janko
  * @Date: 2020-12-08 10:16:01
  * @LastEditors: janko
- * @LastEditTime: 2020-12-09 17:34:56
+ * @LastEditTime: 2020-12-25 14:24:38
  */
 import React, { useState, useEffect } from 'react';
 import { Route, Link, useHistory } from 'react-router-dom';
-import LazyLoad from '@/components/LazyLoad';
 import { Layout, Menu, Dropdown } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { menuTree } from './menuTree';
@@ -86,10 +85,9 @@ const CLayout: React.FC = () => {
           onSelect={menuSelect}
         >
           {menuTree.map((menu) => {
-            const Icon = menu.icon;
             if (menu.children && menu.children.length > 0) {
               return (
-                <SubMenu key={menu.key} icon={<Icon />} title={menu.title}>
+                <SubMenu key={menu.key} icon={<menu.icon />} title={menu.title}>
                   {menu.children.map((child) => (
                     <Menu.Item key={child.key} icon={<child.icon />}>
                       <Link to={child.link}>{child.title}</Link>
@@ -99,7 +97,7 @@ const CLayout: React.FC = () => {
               );
             } else {
               return (
-                <Menu.Item key={menu.key} icon={<Icon />}>
+                <Menu.Item key={menu.key} icon={<menu.icon />}>
                   <Link to={menu.link || ''}>{menu.title}</Link>
                 </Menu.Item>
               );

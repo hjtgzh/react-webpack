@@ -4,7 +4,7 @@
  * @作者: 黄建停
  * @Date: 2020-07-09 16:01:50
  * @LastEditors: janko
- * @LastEditTime: 2020-12-09 15:57:10
+ * @LastEditTime: 2020-12-24 15:57:13
  */
 
 import React from 'react';
@@ -17,14 +17,13 @@ import {
 import CLayout from './layout';
 import LazyLoad from '@/components/LazyLoad';
 
-const Home = LazyLoad(() => import('./pages/home'));
 const Login = LazyLoad(() => import('./pages/login'));
 
 export default (): React.ReactElement => (
   <Router>
     <Switch>
       <Route exact path="/">
-        {true ? <Home /> : <Redirect to="/login" />}
+        {true ? <Redirect to="/home" /> : <Redirect to="/login" />}
       </Route>
       <Route path="/login">
         <Login />
