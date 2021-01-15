@@ -16,13 +16,18 @@ const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 // const glob = require('glob-all');
 
 const path = require('path');
+// mocule、chunk、bundle区别： https://www.cnblogs.com/skychx/p/webpack-module-chunk-bundle.html
 module.exports = {
+  // 没有从entry打包的chunk文件，都会以1，2，3...的文件命名方式输出
+  // 对象中一个字段就会产生一个Chunk，没有key，也会默认给生成的Chunk一个main的名称
   entry: './src/index.tsx',
   output: {
+    // publicPath解析：https://juejin.cn/post/6844903601060446221
+    // publicPath:'./',
     // 只是指示输出的目录，对应一个绝对路径
     path: path.resolve(__dirname, '../build'), // build在上级目录
-    filename: '[name].[chunkhash:8].js',
-    chunkFilename: '[name].[chunkhash:8].js', // 设置按需加载后的chunk名字
+    filename: 'js/[name].[chunkhash:8].js',
+    chunkFilename: 'js/[name].[chunkhash:8].js', // 设置按需加载后的chunk名字
   },
   plugins: [
     new CopyWebpackPlugin({

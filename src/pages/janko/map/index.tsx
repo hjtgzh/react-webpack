@@ -59,20 +59,18 @@ const CMap: React.FC = () => {
     return flattenList;
   };
 
-  // console.log('flatten', flatten(districtsList, 'districts'));
-
+  let parent = '';
   function flattenDistricts(districtsList = []) {
     let flattenList: any = [];
-    let address = '';
     districtsList.forEach((district: any) => {
-      if (district.districts.length > 0) {
-        const { name } = district;
-        address = `${address} ${name}`;
-        // address = name;
+      const { districts, adcode, center, citycode, name, level } = district;
+      if (districts.length > 0) {
+        if (!Array.isArray(citycode)) {
+          parent = `河南省 ${name}`;
+        }
         flattenList = flattenList.concat(flattenDistricts(district.districts));
       }
-      const { adcode, center, citycode, name, level } = district;
-      const addressMore = `${address} ${name}`;
+      const address = `${parent} ${name}`;
       flattenList.push({
         adcode,
         citycode,
@@ -82,15 +80,15 @@ const CMap: React.FC = () => {
           longitude: center.split(',')[0],
           latitude: center.split(',')[1],
         },
-        address: addressMore,
+        address,
       });
     });
     return flattenList;
   }
 
-  console.log('districtsList', districtsList);
+  // console.log('districtsList', districtsList);
 
-  console.log('list', flattenDistricts(districtsList));
+  // console.log('list', flattenDistricts(districtsList));
 
   const events = {
     click: (e) => {

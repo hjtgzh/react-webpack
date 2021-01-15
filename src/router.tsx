@@ -4,12 +4,12 @@
  * @作者: 黄建停
  * @Date: 2020-07-09 16:01:50
  * @LastEditors: janko
- * @LastEditTime: 2020-12-24 15:57:13
+ * @LastEditTime: 2021-01-11 14:21:52
  */
 
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Redirect,
