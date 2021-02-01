@@ -4,7 +4,7 @@
  * @作者: 黄建停
  * @Date: 2020-07-10 16:43:54
  * @LastEditors: janko
- * @LastEditTime: 2020-12-17 15:58:54
+ * @LastEditTime: 2021-02-01 14:32:57
 -->
 
 ## 项目简介
@@ -70,3 +70,27 @@ new webpack.DefinePlugin({
 9. optimize-css-assets-webpack-plugin 插件可以对 css 进行压缩
 10. filename 和 chunkFilename 采用 hash 命名，解决浏览器缓存问题
 11. 使用 PurifyCSS 减少 CSS 文件大小(将项目中没有用到的 css 代码过滤掉)
+
+## 注： 在 VS Code 商店中寻找并安装插件 ESlint，Prettier
+
+编辑 settings.json(位置在 Code===》首选项===》设置 里面搜索 setttings.json)，添加如下代码：
+
+```
+"[javascript]": {
+    "editor.tabSize": 2
+  },
+// 如果保存的时候使用eslint --fix自动修复当前文件的话, 将其设置为true
+"editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+// 如果保存的时候使用prettier自动修复的话, 将其设置为true
+"editor.formatOnSave": true,
+```
+
+## 注： git commit 提交规范[参考链接](https://github.com/conventional-changelog/commitlint)
+
+如（具体可以参考 commitlint.config.js 文件里的注释内容）下：
+
+```
+git commit -m 'feat: 添加新功能'
+git commit -m 'fix: bug修复'
+git commit -m 'style: 修改样式'
+```

@@ -14,13 +14,14 @@
   "license": "ISC",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx}": [
-      "prettier --check src/**/*.ts src/**/*.tsx",
-      "eslint --ext .ts,.tsx src/",
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
       "git add ."
     ]
   },
@@ -50,6 +51,8 @@
     "@babel/plugin-transform-runtime": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.0",
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
