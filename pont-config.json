@@ -1,0 +1,20 @@
+{
+  "originUrl": "http://authorization.dev.thundersdata.com/v2/api-docs",
+  "templatePath": "./pontTemplate",
+  "outDir": "./src/api",
+  "usingMultipleOrigins": true,
+  "mocks": {
+    "enable": true
+  },
+  "templateType": "fetch",
+  "origins": [
+    {
+      "name": "authorization",
+      "originUrl": "http://authorization.dev.thundersdata.com/v2/api-docs"
+    },
+    {
+      "name": "alibabaTest",
+      "originUrl": "http://petstore.swagger.io/v2/swagger.json"
+    }
+  ]
+}

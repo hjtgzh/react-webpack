@@ -4,7 +4,7 @@
  * @作者: 黄建停
  * @Date: 2020-07-09 15:58:20
  * @LastEditors: janko
- * @LastEditTime: 2020-12-18 14:39:40
+ * @LastEditTime: 2021-03-02 10:15:10
  */
 
 import React, { useEffect } from 'react';
@@ -14,8 +14,8 @@ import { Table } from 'antd';
 import isEmpty from 'lodash/isEmpty';
 // import Counter from './Counter';
 import { getHomeTableData } from '@/stores/home';
-import Modal3D from '@/components/Modal3D';
-import { Encrypt, Decrypt } from '@/utils';
+// import Modal3D from '@/components/Modal3D';
+// import { Encrypt, Decrypt } from '@/utils';
 import styles from './style.less';
 
 const columns = [
@@ -64,13 +64,19 @@ const Home: React.FC<Iprops> = () => {
   /* 页面首次加载 */
   useEffect(() => {
     dispatch(getHomeTableData({}));
-    console.log('1', Encrypt(123));
-    console.log('2', Decrypt(Encrypt(123)));
+    // console.log('1', Encrypt(123));
+    // console.log('2', Decrypt(Encrypt(123)));
+    // API..store.getInventory.request({});
+    // console.log('API', API);
+    API.authorization.resource.listResource
+      .request({
+        clientKey: '123',
+      })
+      .then((result) => console.log('result', result));
   }, [dispatch]);
 
   return (
     <>
-      {/* <Counter /> */}
       <div className={styles.content}>
         <Table
           columns={columns}
@@ -83,7 +89,7 @@ const Home: React.FC<Iprops> = () => {
           }}
         />
       </div>
-      <Modal3D url="./dae/taurus/niu.dae" width={160} height={140} />
+      {/* <Modal3D url="./dae/taurus/niu.dae" width={160} height={140} /> */}
     </>
   );
 };
