@@ -4,7 +4,7 @@
  * @作者: 黄建停
  * @Date: 2020-07-09 15:58:20
  * @LastEditors: janko
- * @LastEditTime: 2021-08-27 17:01:42
+ * @LastEditTime: 2021-08-27 17:15:33
  */
 
 import React, { useEffect, useState } from 'react';
@@ -68,8 +68,15 @@ const Home: React.FC<Iprops> = () => {
   /* 页面首次加载 */
   useEffect(() => {
     dispatch(getHomeTableData({}));
-    console.log('1', Encrypt(123));
-    console.log('2', Decrypt(Encrypt(123)));
+    // console.log('1', Encrypt(123));
+    // console.log('2', Decrypt(Encrypt(123)));
+    // API..store.getInventory.request({});
+    // console.log('API', API);
+    API.authorization.resource.listResource
+      .request({
+        clientKey: '123',
+      })
+      .then((result) => console.log('result', result));
   }, [dispatch]);
 
   // sql格式化
@@ -88,7 +95,6 @@ const Home: React.FC<Iprops> = () => {
 
   return (
     <>
-      {/* <Counter /> */}
       <div className={styles.content}>
         {/* <Table
           columns={columns}

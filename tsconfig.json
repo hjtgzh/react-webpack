@@ -9,6 +9,7 @@
     "sourceMap": true,
     "baseUrl": "./",
     "strict": true,
+    "resolveJsonModule": true,
     "paths": {
       "@/*": ["src/*"]
     },
@@ -21,7 +22,9 @@
     "suppressImplicitAnyIndexErrors": true,
     "experimentalDecorators": true,
     "downlevelIteration": true,
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
+    "strictPropertyInitialization": false, // error TS2564: Property 'name' has no initializer and is not definitely assigned in the constructor.
   },
+  "include": ["./src/api/api.d.ts", "./src/**/*", "./global.d.ts", "./typings.d.ts"],
   "exclude": ["node_modules", "dist", "build", "mock"]
 }
