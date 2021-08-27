@@ -4,18 +4,20 @@
  * @作者: 黄建停
  * @Date: 2020-07-09 15:58:20
  * @LastEditors: janko
- * @LastEditTime: 2020-12-18 14:39:40
+ * @LastEditTime: 2021-08-27 17:01:42
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table } from 'antd';
+import { Table, Button, message } from 'antd';
 // 只引用需要的部分
 import isEmpty from 'lodash/isEmpty';
 // import Counter from './Counter';
 import { getHomeTableData } from '@/stores/home';
 import Modal3D from '@/components/Modal3D';
+import SqlEditor from '@/components/SqlEditor';
 import { Encrypt, Decrypt } from '@/utils';
+import { format } from 'sql-formatter';
 import styles from './style.less';
 
 const columns = [
@@ -58,6 +60,8 @@ const Home: React.FC<Iprops> = () => {
     homeTableData: { list, page, total },
   } = useSelector((state) => state.home);
 
+  const [sqlValue, setSqlValue] = useState('');
+
   /* dispatch动作 */
   const dispatch = useDispatch();
 
@@ -68,11 +72,25 @@ const Home: React.FC<Iprops> = () => {
     console.log('2', Decrypt(Encrypt(123)));
   }, [dispatch]);
 
+  // sql格式化
+  function sqlFormat() {
+    if (!sqlValue) {
+      message.info('请输入sql语句');
+      return;
+    }
+    try {
+      const formatSqlValue = format(sqlValue);
+      setSqlValue(formatSqlValue);
+    } catch (err) {
+      message.error('无法格式化sql，请检查sql');
+    }
+  }
+
   return (
     <>
       {/* <Counter /> */}
       <div className={styles.content}>
-        <Table
+        {/* <Table
           columns={columns}
           dataSource={!isEmpty(list) && list}
           rowKey="userId"
@@ -81,9 +99,13 @@ const Home: React.FC<Iprops> = () => {
             current: page,
             total: total,
           }}
-        />
+        /> */}
+        <Button type="primary" onClick={sqlFormat}>
+          SQL格式化
+        </Button>
+        <SqlEditor value={sqlValue} onChange={setSqlValue} />
       </div>
-      <Modal3D url="./dae/taurus/niu.dae" width={160} height={140} />
+      {/* <Modal3D url="./dae/taurus/niu.dae" width={160} height={140} /> */}
     </>
   );
 };
